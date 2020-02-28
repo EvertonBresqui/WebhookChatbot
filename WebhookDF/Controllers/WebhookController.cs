@@ -200,8 +200,8 @@ namespace WebhookDF.Controllers
 							{
 								Fields =
 								{
-									["postback"] = Value.ForString("Card Link URL or text"),
-									["text"] = Value.ForString("Card Link Title")
+									["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
+									["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
 								}
 							}
 						};
