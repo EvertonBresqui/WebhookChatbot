@@ -181,9 +181,22 @@ namespace WebhookDF.Controllers
 						};
 						response = new WebhookResponse()
 						{
-							FulfillmentText = "Teste Payload no WH com sucesso...",
-							//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
-							Payload = new Google.Protobuf.WellKnownTypes.Struct
+							//FulfillmentText = "Teste Payload no WH com sucesso...",
+							////Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+							//Payload = new Google.Protobuf.WellKnownTypes.Struct
+							//{
+							//	Fields =
+							//	{
+							//		["postback"] = Value.ForString("Card Link URL or text"),
+							//		["text"] = Value.ForString("Card Link Title")
+							//	}
+							//}
+
+							//FulfillmentMessages = {
+								
+							//},
+							//FulfillmentText = "testando payload...."
+							Payload = new Struct
 							{
 								Fields =
 								{
@@ -191,11 +204,6 @@ namespace WebhookDF.Controllers
 									["text"] = Value.ForString("Card Link Title")
 								}
 							}
-
-							//FulfillmentMessages = {
-
-							//},
-							//FulfillmentText = "testando payload...."
 						};
 
 
