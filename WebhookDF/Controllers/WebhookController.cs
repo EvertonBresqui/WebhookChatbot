@@ -157,6 +157,9 @@ namespace WebhookDF.Controllers
 						var contexto = request.QueryResult.OutputContexts;
 
 						var payload = "{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}";
+						string[] opcoes = { "SIM", "NÃO", "TALVEZ" };
+
+						Value[] val = opcoes.Select((a) => Value.ForString(a)).ToArray<Value>();
 
 						var message = new Intent.Types.Message
 						{
@@ -168,7 +171,7 @@ namespace WebhookDF.Controllers
 										{
 											["invokeEvent"] = Value.ForBool(true),
 											["afterDialog"] = Value.ForBool(true),
-											["ItemsName"] = Value.ForList(Value.ForString("SIM"),Value.ForString("Não"))
+											["ItemsName"] = Value.ForList(val)
 										}})
 								}
 							}
