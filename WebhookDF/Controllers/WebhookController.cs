@@ -176,17 +176,7 @@ namespace WebhookDF.Controllers
 							//}
 
 							FulfillmentMessages = {
-								new Intent.Types.Message
-								{
-									Payload =
-									{
-										Fields =
-										{
-											["postback"] = Value.ForString("Card Link URL or text"),
-											["text"] = Value.ForString("Card Link Title")
-										}
-									}
-								}
+								message
 							},
 							FulfillmentText = "testando payload...."
 						};
