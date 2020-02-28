@@ -167,34 +167,35 @@ namespace WebhookDF.Controllers
 							{
 								Fields =
 								{
-									["list"] = Value.ForStruct(new Struct{Fields = 
-										{
-											["invokeEvent"] = Value.ForString("@contexto"),
-											["invokeEvent"] = Value.ForBool(true),
-											["afterDialog"] = Value.ForBool(true),
-											["itemsName"] = Value.ForList(val),
-											["itemsEventName"] = Value.ForList(val),
-										}})
+									//["list"] = Value.ForStruct(new Struct{Fields = 
+									//	{
+									//		["invokeEvent"] = Value.ForString("@contexto"),
+									//		["invokeEvent"] = Value.ForBool(true),
+									//		["afterDialog"] = Value.ForBool(true),
+									//		["itemsName"] = Value.ForList(val),
+									//		["itemsEventName"] = Value.ForList(val),
+									//	}})
+									
 								}
 							}
 						};
 						response = new WebhookResponse()
 						{
-							//FulfillmentText = "Teste Payload no WH com sucesso...",
-							////Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
-							//Payload = new Google.Protobuf.WellKnownTypes.Struct
-							//{
-							//	Fields =
-							//	{
-							//		["postback"] = Value.ForString("Card Link URL or text"),
-							//		["text"] = Value.ForString("Card Link Title")
-							//	}
-							//}
+							FulfillmentText = "Teste Payload no WH com sucesso...",
+							//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+							Payload = new Google.Protobuf.WellKnownTypes.Struct
+							{
+								Fields =
+								{
+									["postback"] = Value.ForString("Card Link URL or text"),
+									["text"] = Value.ForString("Card Link Title")
+								}
+							}
 
-							FulfillmentMessages = {
-								message
-							},
-							FulfillmentText = "testando payload...."
+							//FulfillmentMessages = {
+
+							//},
+							//FulfillmentText = "testando payload...."
 						};
 
 
