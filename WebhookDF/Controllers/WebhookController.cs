@@ -161,69 +161,24 @@ namespace WebhookDF.Controllers
 
 						Value[] val = opcoes.Select((a) => Value.ForString(a)).ToArray<Value>();
 
-						var message = new Intent.Types.Message
+						var msg = new Struct
 						{
-							Payload =
+							Fields =
 							{
-								Fields =
 								{
-									//["list"] = Value.ForStruct(new Struct{Fields = 
-									//	{
-									//		["invokeEvent"] = Value.ForString("@contexto"),
-									//		["invokeEvent"] = Value.ForBool(true),
-									//		["afterDialog"] = Value.ForBool(true),
-									//		["itemsName"] = Value.ForList(val),
-									//		["itemsEventName"] = Value.ForList(val),
-									//	}})
-									
+									"imageURL", Value.ForString("URL")
 								}
 							}
 						};
 						response = new WebhookResponse()
 						{
-							//FulfillmentText = "Teste Payload no WH com sucesso...",
-							////Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
-							//Payload = new Google.Protobuf.WellKnownTypes.Struct
-							//{
-							//	Fields =
-							//	{
-							//		["postback"] = Value.ForString("Card Link URL or text"),
-							//		["text"] = Value.ForString("Card Link Title")
-							//	}
-							//}
-
-							FulfillmentMessages = {
-								new Intent.Types.Message()
+							FulfillmentMessages =
+							{
+								new Intent.Types.Message
 								{
-									Payload = new Struct()
-									{
-										Fields =
-										{
-											["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
-											["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
-										}
-									}
-								},
-								new Intent.Types.Message()
-								{
-									Text = new Intent.Types.Message.Types.Text
-									{
-										Text_ =
-										{
-											"OI"
-										}
-									}
+									Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
 								}
 							}
-							//FulfillmentText = "testando payload...."
-							//Payload = new Struct
-							//{
-							//	Fields =
-							//	{
-							//		["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
-							//		["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
-							//	}
-							//}
 						};
 
 
