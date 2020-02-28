@@ -195,12 +195,22 @@ namespace WebhookDF.Controllers
 							FulfillmentMessages = {
 								new Intent.Types.Message()
 								{
-									Payload = new Struct
+									Payload = new Struct()
 									{
 										Fields =
 										{
 											["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
 											["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
+										}
+									}
+								},
+								new Intent.Types.Message()
+								{
+									Text = new Intent.Types.Message.Types.Text
+									{
+										Text_ =
+										{
+											"OI"
 										}
 									}
 								}
