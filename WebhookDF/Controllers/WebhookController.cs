@@ -192,18 +192,28 @@ namespace WebhookDF.Controllers
 							//	}
 							//}
 
-							//FulfillmentMessages = {
-								
-							//},
-							//FulfillmentText = "testando payload...."
-							Payload = new Struct
-							{
-								Fields =
+							FulfillmentMessages = {
+								new Intent.Types.Message()
 								{
-									["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
-									["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
+									Payload = new Struct
+									{
+										Fields =
+										{
+											["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
+											["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
+										}
+									}
 								}
 							}
+							//FulfillmentText = "testando payload...."
+							//Payload = new Struct
+							//{
+							//	Fields =
+							//	{
+							//		["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
+							//		["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
+							//	}
+							//}
 						};
 
 
