@@ -176,7 +176,17 @@ namespace WebhookDF.Controllers
 							{
 								new Intent.Types.Message
 								{
-									Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+									SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+									{
+										SimpleResponses_ =
+										{
+											new Intent.Types.Message.Types.SimpleResponse
+											{
+												DisplayText = "teste",
+												TextToSpeech = "teste"
+											}
+										}
+									}
 								}
 							}
 						};
