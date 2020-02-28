@@ -5017,19 +5017,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Pichau\\.nuget\\packages\\": {}
+    "C:\\Users\\Jean Felipe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pichau\\Desktop\\chatbotapiunoeste-master\\chatbotapiunoeste-master\\WebhookDF\\WebhookDF.csproj",
+      "projectUniqueName": "C:\\Users\\Jean Felipe\\source\\repos\\chatbotapiunoeste\\WebhookDF\\WebhookDF.csproj",
       "projectName": "WebhookDF",
-      "projectPath": "C:\\Users\\Pichau\\Desktop\\chatbotapiunoeste-master\\chatbotapiunoeste-master\\WebhookDF\\WebhookDF.csproj",
-      "packagesPath": "C:\\Users\\Pichau\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pichau\\Desktop\\chatbotapiunoeste-master\\chatbotapiunoeste-master\\WebhookDF\\obj\\",
+      "projectPath": "C:\\Users\\Jean Felipe\\source\\repos\\chatbotapiunoeste\\WebhookDF\\WebhookDF.csproj",
+      "packagesPath": "C:\\Users\\Jean Felipe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jean Felipe\\source\\repos\\chatbotapiunoeste\\WebhookDF\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Pichau\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jean Felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

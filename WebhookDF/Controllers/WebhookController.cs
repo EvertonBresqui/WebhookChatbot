@@ -158,19 +158,27 @@ namespace WebhookDF.Controllers
 
 						var payload = "{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}";
 
-
+						var message = new Intent.Types.Message
+						{
+							Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+						};
 						response = new WebhookResponse()
 						{
-							FulfillmentText = "Teste Payload no WH com sucesso...",
-							//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
-							Payload = new Google.Protobuf.WellKnownTypes.Struct
-							{
-								Fields =
-								{
-									["postback"] = Value.ForString("Card Link URL or text"),
-									["text"] = Value.ForString("Card Link Title")
-								}
-							}
+							//FulfillmentText = "Teste Payload no WH com sucesso...",
+							////Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+							//Payload = new Google.Protobuf.WellKnownTypes.Struct
+							//{
+							//	Fields =
+							//	{
+							//		["postback"] = Value.ForString("Card Link URL or text"),
+							//		["text"] = Value.ForString("Card Link Title")
+							//	}
+							//}
+
+							FulfillmentMessages = {
+								message
+							},
+							FulfillmentText = "testando payload...."
 						};
 
 
