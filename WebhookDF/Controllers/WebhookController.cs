@@ -176,15 +176,24 @@ namespace WebhookDF.Controllers
 							{
 								new Intent.Types.Message
 								{
-									SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+									Payload = new Struct
 									{
-										SimpleResponses_ =
+										Fields =
 										{
-											new Intent.Types.Message.Types.SimpleResponse
-											{
-												DisplayText = "teste",
-												TextToSpeech = "teste"
-											}
+										  
+											["imageURL"] = Value.ForString("//www.unoeste.br/Content/Imagens/Banners/vestibular2020/agendado/desktop.jpg"),
+											["redirectTo"] = Value.ForString("http://www.unoeste.br/vestibular")
+										
+										}
+									}
+								},
+								new Intent.Types.Message
+								{
+									Text = new Intent.Types.Message.Types.Text
+									{
+										Text_=
+										{
+											"oi"
 										}
 									}
 								}
