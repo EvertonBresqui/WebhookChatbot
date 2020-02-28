@@ -169,9 +169,11 @@ namespace WebhookDF.Controllers
 								{
 									["list"] = Value.ForStruct(new Struct{Fields = 
 										{
+											["invokeEvent"] = Value.ForString("@contexto"),
 											["invokeEvent"] = Value.ForBool(true),
 											["afterDialog"] = Value.ForBool(true),
-											["ItemsName"] = Value.ForList(val)
+											["itemsName"] = Value.ForList(val),
+											["itemsEventName"] = Value.ForList(val),
 										}})
 								}
 							}
