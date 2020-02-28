@@ -160,7 +160,18 @@ namespace WebhookDF.Controllers
 
 						var message = new Intent.Types.Message
 						{
-							Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+							Payload =
+							{
+								Fields =
+								{
+									["list"] = Value.ForStruct(new Struct{Fields = 
+										{
+											["invokeEvent"] = Value.ForBool(true),
+											["afterDialog"] = Value.ForBool(true),
+											["ItemsName"] = Value.ForList(Value.ForString("SIM"),Value.ForString("Não"))
+										}})
+								}
+							}
 						};
 						response = new WebhookResponse()
 						{
