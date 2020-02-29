@@ -123,7 +123,7 @@ namespace WebhookDF.Controllers
 							var cursos = new Models.Curso();
 							var dlcursos = new DAL.CursoDAL();
 							var rcursos = dlcursos.ObterTodos();
-							var mensagem = "<ul>";
+							var mensagem = "Qual Curso Deseja ? <br/><ul>";
 
 							foreach (var item in rcursos)
 							{
