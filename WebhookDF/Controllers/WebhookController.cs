@@ -128,7 +128,7 @@ namespace WebhookDF.Controllers
 
 							var dialogflowResponse = new WebhookResponse
 							{
-								FulfillmentText = "Qual Curso Deseja ? ",
+								FulfillmentText = "<li>SIM</li>",
 								FulfillmentMessages =
 								{
 									new Intent.Types.Message
@@ -145,7 +145,7 @@ namespace WebhookDF.Controllers
 									new Intent.Types.Message
 									{
 
-										Payload = payload
+										
 									}
 								}
 							};
@@ -193,7 +193,7 @@ namespace WebhookDF.Controllers
 						
 						var dialogflowResponse = new WebhookResponse
 						{
-							FulfillmentText = "Temos os Seguintes Cursos: ",
+							FulfillmentText = "<li>SIM</li>",
 							FulfillmentMessages =
 							{
 								new Intent.Types.Message
@@ -203,7 +203,7 @@ namespace WebhookDF.Controllers
 									{
 										Text_ =
 										{
-											"Temos os Seguintes Cursos: "
+											"<li>SIM</li>"
 										}
 									}
 								},
