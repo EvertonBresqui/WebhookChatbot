@@ -233,13 +233,14 @@ namespace WebhookDF.Controllers
 								},
 								new Intent.Types.Message
 								{
-									Payload = new Struct
-									{
-										Fields =
-										{
-											["list"] = Value.ForString("Teste")
-										}
-									}
+									//Payload = new Struct
+									//{
+									//	Fields =
+									//	{
+									//		["list"] = Value.ForList(Value.ForBool = false)
+									//	}
+									//}
+									Payload = payload
 								}
 							}
 						};
