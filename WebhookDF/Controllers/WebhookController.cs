@@ -122,35 +122,15 @@ namespace WebhookDF.Controllers
 							var contexto = request.QueryResult.OutputContexts;
 							var cursos = new Models.Curso();
 							var dlcursos = new DAL.CursoDAL();
-							var rcursos = dlcursos.ObterTodosFormatoTexto().ToString();
-							var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [" + rcursos + "],\"itemsEventName\": [" + rcursos + "]}}");
+							var rcursos = dlcursos.ObterTodos();
+							var mensagem = "Qual Curso Deseja ? <br/><ul>";
 
-
-							var dialogflowResponse = new WebhookResponse
+							foreach (var item in rcursos)
 							{
-								FulfillmentText = "Qual Curso Deseja ? ",
-								FulfillmentMessages =
-								{
-									new Intent.Types.Message
-									{
-
-										Text = new Intent.Types.Message.Types.Text
-										{
-											Text_ =
-											{
-												"Qual Curso Deseja ? "
-											}
-										}
-									},
-									new Intent.Types.Message
-									{
-
-										Payload = payload
-									}
-								}
-							};
-							var jsonResponse = dialogflowResponse.ToString();
-							return new ContentResult { Content = jsonResponse, ContentType = "aplication/json" };
+								mensagem += "<li>" + item.Nome + "</>";
+							}
+							mensagem += "</ul>";
+							response.FulfillmentText = mensagem;
 						}
 						else
 						{
@@ -193,7 +173,7 @@ namespace WebhookDF.Controllers
 						
 						var dialogflowResponse = new WebhookResponse
 						{
-							FulfillmentText = "Temos os Seguintes Cursos: ",
+							FulfillmentText = "Qual Curso Deseja ? <br/><li>SIM</li>",
 							FulfillmentMessages =
 							{
 								new Intent.Types.Message
@@ -203,7 +183,7 @@ namespace WebhookDF.Controllers
 									{
 										Text_ =
 										{
-											"Temos os Seguintes Cursos: "
+											"<li>SIM</li>"
 										}
 									}
 								},
