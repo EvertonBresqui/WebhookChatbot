@@ -230,6 +230,16 @@ namespace WebhookDF.Controllers
 											"Oi"
 										}
 									}
+								},
+								new Intent.Types.Message
+								{
+									Payload = new Struct
+									{
+										Fields =
+										{
+											["list"] = Value.ForString("Teste")
+										}
+									}
 								}
 							}
 						};
