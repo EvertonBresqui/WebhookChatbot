@@ -157,10 +157,14 @@ namespace WebhookDF.Controllers
 					{
 						var contexto = request.QueryResult.OutputContexts;
 
-						var payload = "{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}";
+						var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}");
 
 						response = new WebhookResponse();
 						response.FulfillmentText = "oi";
+						response.FulfillmentMessages.Add(new Intent.Types.Message()
+						{
+							Payload = payload
+						}) ;
 						//response.FulfillmentMessages.Add(new Intent.Types.Message()
 						//{
 						//	Text = new Intent.Types.Message.Types.Text() { 
@@ -171,25 +175,25 @@ namespace WebhookDF.Controllers
 						//		}
 						//	}
 						//}) ;
-						response.FulfillmentMessages.Insert(0, new Intent.Types.Message()
-						{
-							Text = new Intent.Types.Message.Types.Text()
-							{
-								Text_ =
-								{
-									"oi"
-								}
-							}
-						}) ;
+						//response.FulfillmentMessages.Insert(0, new Intent.Types.Message()
+						//{
+						//	Text = new Intent.Types.Message.Types.Text()
+						//	{
+						//		Text_ =
+						//		{
+						//			"oi"
+						//		}
+						//	}
+						//}) ;
 						//response.FulfillmentMessages[0].Text.Text_.Add();
-						
+
 						//response.FulfillmentMessages[1].Payload.Fields.Add("redirectTO", Value.ForString("Teste"));
-						string payloadSerialized = JsonConvert.SerializeObject(payload);
-						response.FulfillmentMessages.Add(new Intent.Types.Message()
-						{
-							Payload = new Struct()
-						});
-						response.FulfillmentMessages[1].Payload.Fields.Add("list",Value.ForString("Iu"));
+						//string payloadSerialized = JsonConvert.SerializeObject(payload);
+						//response.FulfillmentMessages.Add(new Intent.Types.Message()
+						//{
+						//	Payload = new Struct()
+						//});
+						//response.FulfillmentMessages[1].Payload.Fields.Add("list",Value.ForString("Iu"));
 						//response.FulfillmentMessages.Add(new Intent.Types.Message()
 						//{
 						//	//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payloadSerialized)
@@ -201,7 +205,7 @@ namespace WebhookDF.Controllers
 						//		}
 						//	}
 						//});
-
+						
 
 					}
 				}
