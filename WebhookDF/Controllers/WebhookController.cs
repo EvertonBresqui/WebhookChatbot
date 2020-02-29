@@ -145,7 +145,7 @@ namespace WebhookDF.Controllers
 						if (curso != null)
 						{
 							HttpContext.Session.SetString("curso", curso.Nome);
-							response.FulfillmentText = "Vi que você não é um candidato. <a href=\"javascript: Index.Gravar();\">Clique aqui para se inscrever</a> ou me pergunte alguma coisa.";
+							response.FulfillmentText = "Vi que você não é um candidato. <a href=\"javascript: BOT.Gravar();\">Clique aqui para se inscrever</a> ou me pergunte alguma coisa.";
 						}
 						else
 						{
