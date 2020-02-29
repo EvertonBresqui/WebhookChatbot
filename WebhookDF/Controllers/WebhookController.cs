@@ -165,11 +165,13 @@ namespace WebhookDF.Controllers
 							Text = new Intent.Types.Message.Types.Text()
 						});
 						response.FulfillmentMessages[0].Text.Text_.Add("oi");
-						response.FulfillmentMessages.Add(new Intent.Types.Message() { 
-							Payload = new Struct()
+						
+						//response.FulfillmentMessages[1].Payload.Fields.Add("redirectTO", Value.ForString("Teste"));
+						string payloadSerialized = JsonConvert.SerializeObject(payload);
+						response.FulfillmentMessages.Add(new Intent.Types.Message()
+						{
+							Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
 						});
-						response.FulfillmentMessages[1].Payload.Fields.Add("redirectTO", Value.ForString("Teste"));
-						//string payloadSerialized = JsonConvert.SerializeObject(payload);
 						//response.FulfillmentMessages.Add(new Intent.Types.Message()
 						//{
 						//	//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payloadSerialized)
