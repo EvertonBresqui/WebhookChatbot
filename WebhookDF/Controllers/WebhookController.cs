@@ -159,12 +159,12 @@ namespace WebhookDF.Controllers
 
 						var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}");
 
-						response = new WebhookResponse();
-						response.FulfillmentText = "oi";
-						response.FulfillmentMessages.Add(new Intent.Types.Message()
-						{
-							Payload = payload
-						}) ;
+						//response = new WebhookResponse();
+						//response.FulfillmentText = "oi";
+						//response.FulfillmentMessages.Add(new Intent.Types.Message()
+						//{
+						//	Payload = payload
+						//}) ;
 						//response.FulfillmentMessages.Add(new Intent.Types.Message()
 						//{
 						//	Text = new Intent.Types.Message.Types.Text() { 
@@ -205,8 +205,29 @@ namespace WebhookDF.Controllers
 						//		}
 						//	}
 						//});
-						
-
+						var dialogflowResponse = new WebhookResponse
+						{
+							FulfillmentText = "oi",
+							FulfillmentMessages =
+							{
+								new Intent.Types.Message
+								{
+									SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+									{
+										SimpleResponses_ =
+										{
+											new Intent.Types.Message.Types.SimpleResponse
+											{
+												DisplayText = "oi",
+												TextToSpeech = "oi"
+											}
+										}
+									}
+								}
+							}
+						};
+						var jsonResponse = dialogflowResponse.ToString();
+						return new ContentResult { Content = jsonResponse, ContentType = "aplication/json" };
 					}
 				}
 				catch (Exception ex)
