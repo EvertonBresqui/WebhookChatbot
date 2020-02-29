@@ -161,13 +161,23 @@ namespace WebhookDF.Controllers
 
 						response = new WebhookResponse();
 						response.FulfillmentText = "oi";
-						response.FulfillmentMessages.Add(new Intent.Types.Message()
+						//response.FulfillmentMessages.Add(new Intent.Types.Message()
+						//{
+						//	Text = new Intent.Types.Message.Types.Text() { 
+						//		Text_ =
+						//		{
+						//			"Oi",
+						//			"Oi denovo"
+						//		}
+						//	}
+						//}) ;
+						response.FulfillmentMessages.Insert(0, new Intent.Types.Message()
 						{
-							Text = new Intent.Types.Message.Types.Text() { 
+							Text = new Intent.Types.Message.Types.Text()
+							{
 								Text_ =
 								{
-									"Oi",
-									"Oi denovo"
+									"oi"
 								}
 							}
 						}) ;
