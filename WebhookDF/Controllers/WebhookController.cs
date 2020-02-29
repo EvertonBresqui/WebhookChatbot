@@ -161,10 +161,17 @@ namespace WebhookDF.Controllers
 
 						response = new WebhookResponse();
 						response.FulfillmentText = "oi";
-						response.FulfillmentMessages.Add(new Intent.Types.Message() { 
-							Text = new Intent.Types.Message.Types.Text()
-						});
-						response.FulfillmentMessages[0].Text.Text_.Add("oi");
+						response.FulfillmentMessages.Add(new Intent.Types.Message()
+						{
+							Text = new Intent.Types.Message.Types.Text() { 
+								Text_ =
+								{
+									"Oi",
+									"Oi denovo"
+								}
+							}
+						}) ;
+						//response.FulfillmentMessages[0].Text.Text_.Add();
 						
 						//response.FulfillmentMessages[1].Payload.Fields.Add("redirectTO", Value.ForString("Teste"));
 						string payloadSerialized = JsonConvert.SerializeObject(payload);
