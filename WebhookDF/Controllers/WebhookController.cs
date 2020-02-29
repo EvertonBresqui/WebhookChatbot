@@ -170,8 +170,9 @@ namespace WebhookDF.Controllers
 						string payloadSerialized = JsonConvert.SerializeObject(payload);
 						response.FulfillmentMessages.Add(new Intent.Types.Message()
 						{
-							Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payload)
+							Payload = new Struct()
 						});
+						response.FulfillmentMessages[1].Payload.Fields.Add("list",Value.ForString("Iu"));
 						//response.FulfillmentMessages.Add(new Intent.Types.Message()
 						//{
 						//	//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payloadSerialized)
