@@ -37,8 +37,7 @@ namespace WebhookDF.Controllers
         {
 			bool resposta = System.IO.File.Exists(_diretorio);
 			return Ok(new { msg = "deu certo " +" "+_diretorio +  resposta });
-        }
-
+        }		
 		private bool Autorizado(IHeaderDictionary httpHeader)
 		{
 
@@ -70,8 +69,7 @@ namespace WebhookDF.Controllers
 				_jsonParser.Parse<WebhookRequest>(dados.GetRawText());
 
 			WebhookResponse response = new WebhookResponse();
-
-
+			
 			if (request != null)
 			{
 				string action = request.QueryResult.Action;
@@ -121,7 +119,38 @@ namespace WebhookDF.Controllers
 						if (Convert.ToInt32(HttpContext.Session.GetInt32("cpfExists")) == 0 && candidato.EmailIsvalid(email))
 						{
 							HttpContext.Session.SetString("email", email);
-							response.FulfillmentText = "Qual curso deseja?";
+							var contexto = request.QueryResult.OutputContexts;
+							var cursos = new Models.Curso();
+							var dlcursos = new DAL.CursoDAL();
+							var rcursos = dlcursos.ObterTodosFormatoTexto().ToString();
+							var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [" + rcursos + "],\"itemsEventName\": [" + rcursos + "]}}");
+
+
+							var dialogflowResponse = new WebhookResponse
+							{
+								FulfillmentText = "Temos os Seguintes Cursos: ",
+								FulfillmentMessages =
+								{
+									new Intent.Types.Message
+									{
+
+										Text = new Intent.Types.Message.Types.Text
+										{
+											Text_ =
+											{
+												"Temos os Seguintes Cursos: "
+											}
+										}
+									},
+									new Intent.Types.Message
+									{
+
+										Payload = payload
+									}
+								}
+							};
+							var jsonResponse = dialogflowResponse.ToString();
+							return new ContentResult { Content = jsonResponse, ContentType = "aplication/json" };
 						}
 						else
 						{
