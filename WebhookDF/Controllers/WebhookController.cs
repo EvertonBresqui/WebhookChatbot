@@ -156,90 +156,31 @@ namespace WebhookDF.Controllers
 					else if (action == "ActionTesteWHPayload")
 					{
 						var contexto = request.QueryResult.OutputContexts;
+						var cursos = new Models.Curso();
+						var dlcursos = new DAL.CursoDAL();
+						var rcursos = dlcursos.ObterTodosFormatoTexto().ToString();						
+						var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": ["+ rcursos+"],\"itemsEventName\": ["+rcursos+"]}}");
 
-						var payload = Struct.Parser.ParseJson("{\"list\": {\"replacementKey\": \"@contexto\",\"invokeEvent\": true,\"afterDialog\": true,\"itemsName\": [\"Sim\",\"Não\"],\"itemsEventName\": [\"QueroInscrever\",\"NaoQueroInscrever\"]}}");
-
-						//response = new WebhookResponse();
-						//response.FulfillmentText = "oi";
-						//response.FulfillmentMessages.Add(new Intent.Types.Message()
-						//{
-						//	Payload = payload
-						//}) ;
-						//response.FulfillmentMessages.Add(new Intent.Types.Message()
-						//{
-						//	Text = new Intent.Types.Message.Types.Text() { 
-						//		Text_ =
-						//		{
-						//			"Oi",
-						//			"Oi denovo"
-						//		}
-						//	}
-						//}) ;
-						//response.FulfillmentMessages.Insert(0, new Intent.Types.Message()
-						//{
-						//	Text = new Intent.Types.Message.Types.Text()
-						//	{
-						//		Text_ =
-						//		{
-						//			"oi"
-						//		}
-						//	}
-						//}) ;
-						//response.FulfillmentMessages[0].Text.Text_.Add();
-
-						//response.FulfillmentMessages[1].Payload.Fields.Add("redirectTO", Value.ForString("Teste"));
-						//string payloadSerialized = JsonConvert.SerializeObject(payload);
-						//response.FulfillmentMessages.Add(new Intent.Types.Message()
-						//{
-						//	Payload = new Struct()
-						//});
-						//response.FulfillmentMessages[1].Payload.Fields.Add("list",Value.ForString("Iu"));
-						//response.FulfillmentMessages.Add(new Intent.Types.Message()
-						//{
-						//	//Payload = Google.Protobuf.WellKnownTypes.Struct.Parser.ParseJson(payloadSerialized)
-						//	Payload =
-						//	{
-						//		Fields =
-						//		{
-						//			["oi"] = Value.ForString("iu")
-						//		}
-						//	}
-						//});
+						
 						var dialogflowResponse = new WebhookResponse
 						{
-							FulfillmentText = "oi",
+							FulfillmentText = "Temos os Seguintes Cursos: ",
 							FulfillmentMessages =
 							{
 								new Intent.Types.Message
 								{
-									//SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
-									//{
-									//	SimpleResponses_ =
-									//	{
-									//		new Intent.Types.Message.Types.SimpleResponse
-									//		{
-									//			DisplayText = "oi",
-									//			TextToSpeech = "oi"
-									//		}
-									//	}
-									//}
+									
 									Text = new Intent.Types.Message.Types.Text
 									{
 										Text_ =
 										{
-											"Oi"
+											"Temos os Seguintes Cursos: "
 										}
 									}
 								},
 								new Intent.Types.Message
 								{
-									//Payload = new Struct
-									//{
-									//	Fields =
-									//	{
-									//		["list"] = Value.ForList(Value.ForBool = false)
-									//	}
-									//}
+									
 									Payload = payload
 								}
 							}

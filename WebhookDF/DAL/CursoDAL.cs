@@ -48,7 +48,7 @@ namespace WebhookDF.DAL
 
         public string ObterTodosFormatoTexto() {
 
-            string cursos = string.Join(", ", (from curso in _cursos select curso.Nome).ToArray());
+            string cursos = "\"" + string.Join("\",\"", (from curso in _cursos select curso.Nome).ToArray()) + "\"";
             return cursos;
         }
 
