@@ -212,15 +212,22 @@ namespace WebhookDF.Controllers
 							{
 								new Intent.Types.Message
 								{
-									SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+									//SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+									//{
+									//	SimpleResponses_ =
+									//	{
+									//		new Intent.Types.Message.Types.SimpleResponse
+									//		{
+									//			DisplayText = "oi",
+									//			TextToSpeech = "oi"
+									//		}
+									//	}
+									//}
+									Text = new Intent.Types.Message.Types.Text
 									{
-										SimpleResponses_ =
+										Text_ =
 										{
-											new Intent.Types.Message.Types.SimpleResponse
-											{
-												DisplayText = "oi",
-												TextToSpeech = "oi"
-											}
+											"Oi"
 										}
 									}
 								}
