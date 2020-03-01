@@ -127,7 +127,7 @@ namespace WebhookDF.Controllers
 
 							foreach (var item in rcursos)
 							{
-								mensagem += "<li>" + item.Nome + "</>";
+								mensagem += "<li><a href=\"javascript:BOT.InfCurso('" + item.Nome +"');\">" + item.Nome + "</a></li>";
 							}
 							mensagem += "</ul>";
 							response.FulfillmentText = mensagem;
