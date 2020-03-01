@@ -154,12 +154,14 @@ namespace WebhookDF.Controllers
 					}
 					else if (action == "ActionCadastrar")
 					{
-						string cursoo = HttpContext.Session.GetString("curso");
-						//curso = curso.Obter(HttpContext.Session.GetString("curso"));
+						curso = curso.Obter(HttpContext.Session.GetString("curso"));
 						candidato.Setar(HttpContext.Session.GetString("nome"), HttpContext.Session.GetString("cpf"), HttpContext.Session.GetString("email"), curso);
 
 						if (candidato.Gravar())
+						{
 							response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!";
+
+						}
 						else
 							response.FulfillmentText = "Desculpe não foi possível realizar cadastro :(, por favor tente novamente mais tarde.";
 					}
