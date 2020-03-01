@@ -18,6 +18,7 @@ namespace WebhookDF.DAL
                 Id = 1,
                 Nome = "Sistemas para Internet",
                 Preco = 200,
+                Url = "https://www.unoeste.br/graduacao/sistemas-internet",
                 Sinonimos = new List<string>() { "TSI", "Técnologo Sistemas para Internet" }
             };
             Models.Curso curso2 = new Models.Curso
@@ -25,6 +26,7 @@ namespace WebhookDF.DAL
                 Id = 2,
                 Nome = "Ciência da Computação",
                 Preco = 200,
+                Url = "https://www.unoeste.br/graduacao/ciencia-computacao",
                 Sinonimos = new List<string>() { "BCC", "Bacharelado Ciência da Computação" }
             };
             Models.Curso curso3 = new Models.Curso
@@ -32,6 +34,7 @@ namespace WebhookDF.DAL
                 Id = 3,
                 Nome = "Sistemas da Informação",
                 Preco = 200,
+                Url = "https://www.unoeste.br/graduacao/sistemas-informacao",
                 Sinonimos = new List<string>() { "BSI", "Bacharelado Sistemas da Informação" }
             };
 

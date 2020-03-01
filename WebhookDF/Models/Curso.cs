@@ -10,6 +10,7 @@ namespace WebhookDF.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public double Preco {get;set;}
+        public string Url { get; set; }
         public List<string> Sinonimos { get; set; }
         public Curso()
         {
