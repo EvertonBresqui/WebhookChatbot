@@ -154,7 +154,8 @@ namespace WebhookDF.Controllers
 					}
 					else if (action == "ActionCadastrar")
 					{
-						curso = curso.Obter(HttpContext.Session.GetString("curso"));
+						string cursoo = HttpContext.Session.GetString("curso");
+						//curso = curso.Obter(HttpContext.Session.GetString("curso"));
 						candidato.Setar(HttpContext.Session.GetString("nome"), HttpContext.Session.GetString("cpf"), HttpContext.Session.GetString("email"), curso);
 
 						if (candidato.Gravar())
