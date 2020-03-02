@@ -118,7 +118,7 @@ namespace WebhookDF.Controllers
                         if (Convert.ToInt32(HttpContext.Session.GetInt32("cpfExists")) == 0 && candidato.EmailIsvalid(email))
                         {
                             HttpContext.Session.SetString("email", email);
-                            var rcursos = curso.ObterTotos();
+                            var rcursos = curso.ObterTodos();
                             var mensagem = "Qual Curso Deseja ? <br/><ul>";
 
                             foreach (var item in rcursos)
@@ -155,7 +155,6 @@ namespace WebhookDF.Controllers
 
                         if (candidato.Gravar())
                         {
-                            HttpContext.Session.Clear();
                             HttpContext.Session.SetInt32("logado", 1);
                             response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!";
 
@@ -179,20 +178,33 @@ namespace WebhookDF.Controllers
                     {
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
+                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            response.FulfillmentText = "Informações cadastrais: <br/>"+
+                                "Nome: "+ candidato.Nome +"<br/>"+
+                                "CPF: "+ candidato.CPF + "<br/>"+
+                                "Email:"+ candidato.Email + " <br/>"+
+                                "Vestibulando curso: "+ candidato.Curso.Nome + " <br/>";
                         }
                     }
                     else if (action == "ActionObterResultadoVestibular")
                     {
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
-
+                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            if (candidato.ResVestibular == 1)
+                                response.FulfillmentText = "Foi aprovado no vestibular :)";
+                            else if (candidato.ResVestibular == 0)
+                                response.FulfillmentText = "O resultado ainda não saiu :(";
+                            else if(candidato.ResVestibular == -1)
+                                response.FulfillmentText = "Infelizmente você foi reprovado na primeira chamada :(";
                         }
                     }
                     else if (action == "ActionObterNumeroAlunosMatriculados")
                     {
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
-
+                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições." ;
                         }
                     }
                 }

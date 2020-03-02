@@ -11,6 +11,7 @@ namespace WebhookDF.Models
         public string Nome { get; set; }
         public double Preco {get;set;}
         public string Url { get; set; }
+        public int NumeroInscritos { get; set; }
         public List<string> Sinonimos { get; set; }
         public Curso()
         {
@@ -22,11 +23,12 @@ namespace WebhookDF.Models
             return cursoDal.ObterCurso(curso);
         }
 
-        public List<Curso> ObterTotos()
+        public List<Curso> ObterTodos()
         {
             DAL.CursoDAL cursoDal = new DAL.CursoDAL();
             return cursoDal.ObterTodos();
         }
+
 
     }
 }

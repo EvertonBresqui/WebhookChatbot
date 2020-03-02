@@ -16,6 +16,7 @@ namespace WebhookDF.Models
         public Models.Curso Curso { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
+        public int ResVestibular { get; set; }
         private DAL.CandidatoDAL dalCandidato;
 
         public Models.Candidato ObterCandidato(string cpf){
@@ -45,6 +46,10 @@ namespace WebhookDF.Models
         public void CarregarBase()
         {
             this.dalCandidato = new DAL.CandidatoDAL();
+        }
+        public Models.Candidato Obter(string cpf)
+        {
+            return dalCandidato.ObterCandidato(cpf);
         }
     }
 }

@@ -21,6 +21,7 @@ namespace WebhookDF.DAL
             {
                 Id = 1,
                 Nome = "Everton",
+                ResVestibular = 1,
                 CPF = "45094431889",
                 Curso = cursoDal.Obter(1),
                 Email = "everton_bresqui@hotmail.com"
@@ -29,6 +30,7 @@ namespace WebhookDF.DAL
             {
                 Id = 2,
                 Nome = "Jean",
+                ResVestibular = 1,
                 CPF = "44444444444",
                 Curso = cursoDal.Obter(1),
                 Email = "jean@hotmail.com"
@@ -37,6 +39,7 @@ namespace WebhookDF.DAL
             {
                 Id = 3,
                 Nome = "Vinicius",
+                ResVestibular = 1,
                 CPF = "55555555555",
                 Curso = cursoDal.Obter(3),
                 Email = "vinicius@hotmail.com"
