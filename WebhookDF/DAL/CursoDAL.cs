@@ -44,7 +44,7 @@ namespace WebhookDF.DAL
         }
 
 
-        public IEnumerable<Models.Curso> ObterTodos()
+        public List<Models.Curso> ObterTodos()
         {
             return _cursos;
         }

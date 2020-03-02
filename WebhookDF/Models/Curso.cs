@@ -21,6 +21,12 @@ namespace WebhookDF.Models
             DAL.CursoDAL cursoDal = new DAL.CursoDAL();
             return cursoDal.ObterCurso(curso);
         }
-        
+
+        public List<Curso> ObterTotos()
+        {
+            DAL.CursoDAL cursoDal = new DAL.CursoDAL();
+            return cursoDal.ObterTodos();
+        }
+
     }
 }
