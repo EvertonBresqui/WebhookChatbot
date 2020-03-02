@@ -99,7 +99,7 @@ namespace WebhookDF.Controllers
                             {
                                 //Salvando em sessão o cpf
                                 HttpContext.Session.SetInt32("logado", 1);
-                                response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, Como posso te ajudar ?";
+                                response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, " + this.Menu();
                             }
                             else
                             {
@@ -166,12 +166,7 @@ namespace WebhookDF.Controllers
                     {
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
-                            response.FulfillmentText = "Quais informações deseja obter? <br/><ul>" +
-                            "<li><a href=\"javascript:BOT.Menu(1);\">Obter dados cadastrais</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(2);\">Obter resultado vestibular</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(3);\">Número de alunos matriculados para este curso</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(4);\">Sobre a Unoeste</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
+                            response.FulfillmentText = this.Menu();
                         }
                     }
                     else if (action == "ActionObterDadosCadastrais")
@@ -218,6 +213,16 @@ namespace WebhookDF.Controllers
             return Ok(response);
 
 
+        }
+
+        private string Menu()
+        {
+            return "Quais informações deseja obter? <br/><ul>" +
+                            "<li><a href=\"javascript:BOT.Menu(1);\">Obter dados cadastrais</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(2);\">Obter resultado vestibular</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(3);\">Número de alunos matriculados para este curso</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(4);\">Sobre a Unoeste</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
         }
     }
 }
