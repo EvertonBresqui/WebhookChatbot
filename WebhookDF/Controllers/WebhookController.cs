@@ -175,6 +175,26 @@ namespace WebhookDF.Controllers
                             "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
                         }
                     }
+                    else if (action == "ActionObterDadosCadastrais")
+                    {
+                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        {
+                        }
+                    }
+                    else if (action == "ActionObterResultadoVestibular")
+                    {
+                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        {
+
+                        }
+                    }
+                    else if (action == "ActionObterNumeroAlunosMatriculados")
+                    {
+                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        {
+
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
