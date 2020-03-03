@@ -28,12 +28,12 @@ namespace WebhookDF
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
-
+            
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10000);
-                options.Cookie.HttpOnly = true;
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.Name = "chatbotunoeste.Session";
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
