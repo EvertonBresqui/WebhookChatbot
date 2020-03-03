@@ -8,9 +8,6 @@ namespace WebhookDF.Models
 {
     public class Candidato
     {
-        int _id;
-        string _nome, _CPF, _curso;
-
         public int Id { get; set; }
         public string Nome { get; set; }
         public Models.Curso Curso { get; set; }
@@ -32,10 +29,10 @@ namespace WebhookDF.Models
         }
 
         public void Setar(string nome, string cpf, string email, Models.Curso curso){
-            this.Nome = nome;
-            this.CPF = cpf;
-            this.Email = email;
-            this.Curso = curso;
+            Nome = nome;
+            CPF = cpf;
+            Email = email;
+            Curso = curso;
         }
 
         public bool Gravar(){

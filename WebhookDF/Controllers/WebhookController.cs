@@ -104,11 +104,15 @@ namespace WebhookDF.Controllers
                             else
                             {
                                 HttpContext.Session.SetInt32("cpfExists", 0);
-                                HttpContext.Session.SetString("cpf", cpf);
+                                HttpContext.Session.SetInt32("cpfExists", 0);
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu email?";
                             }
 
                         }
+                    }
+                    else if (action == "ActionInformaNome")
+                    {
+                        HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
                     }
                     else if (action == "ActionInformaEmail")
                     {
@@ -174,11 +178,11 @@ namespace WebhookDF.Controllers
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
                             candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
-                            response.FulfillmentText = "Informações cadastrais: <br/>"+
-                                "Nome: "+ candidato.Nome +"<br/>"+
-                                "CPF: "+ candidato.CPF + "<br/>"+
-                                "Email:"+ candidato.Email + " <br/>"+
-                                "Vestibulando curso: "+ candidato.Curso.Nome + " <br/>";
+                            response.FulfillmentText = "Informações cadastrais: <br/>" +
+                                "Nome: " + candidato.Nome + "<br/>" +
+                                "CPF: " + candidato.CPF + "<br/>" +
+                                "Email:" + candidato.Email + " <br/>" +
+                                "Vestibulando curso: " + candidato.Curso.Nome + " <br/>";
                         }
                     }
                     else if (action == "ActionObterResultadoVestibular")
@@ -190,7 +194,7 @@ namespace WebhookDF.Controllers
                                 response.FulfillmentText = "Foi aprovado no vestibular :)";
                             else if (candidato.ResVestibular == 0)
                                 response.FulfillmentText = "O resultado ainda não saiu :(";
-                            else if(candidato.ResVestibular == -1)
+                            else if (candidato.ResVestibular == -1)
                                 response.FulfillmentText = "Infelizmente você foi reprovado na primeira chamada :(";
                         }
                     }
@@ -199,7 +203,7 @@ namespace WebhookDF.Controllers
                         if (HttpContext.Session.GetInt32("logado") == 1)
                         {
                             candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
-                            response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições." ;
+                            response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições.";
                         }
                     }
                 }
