@@ -112,8 +112,10 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaNome")
                     {
+                        response.FulfillmentText = HttpContext.Session.GetString("cpf");
+                        /*
                         HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
-                        response.FulfillmentText = "Qual o seu email?";
+                        response.FulfillmentText = "Qual o seu email?";*/
                     }
                     else if (action == "ActionInformaEmail")
                     {
