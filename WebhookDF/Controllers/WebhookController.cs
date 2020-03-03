@@ -105,7 +105,7 @@ namespace WebhookDF.Controllers
                             {
                                 HttpContext.Session.SetInt32("cpfExists", 0);
                                 HttpContext.Session.SetInt32("cpfExists", 0);
-                                response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu email?";
+                                response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
                             }
 
                         }
@@ -113,6 +113,7 @@ namespace WebhookDF.Controllers
                     else if (action == "ActionInformaNome")
                     {
                         HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
+                        response.FulfillmentText = "Qual o seu email?";
                     }
                     else if (action == "ActionInformaEmail")
                     {
