@@ -104,7 +104,7 @@ namespace WebhookDF.Controllers
                             else
                             {
                                 HttpContext.Session.SetInt32("cpfExists", 0);
-                                HttpContext.Session.SetInt32("cpfExists", 0);
+                                HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
                             }
 
