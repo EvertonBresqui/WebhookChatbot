@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +19,6 @@ namespace WebhookDF
         public Startup(IConfiguration configuration)
         {
 
-
             Configuration = configuration;
         }
 
@@ -27,18 +27,12 @@ namespace WebhookDF
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //adicionando sessão
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
+            services.Configure<CookiePolicyOptions>(options =>
             {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(3600);
-                options.Cookie.HttpOnly = true;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = true;
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            //==================
 
             // Add service and create Policy with options
             services.AddCors(options =>
@@ -62,8 +56,6 @@ namespace WebhookDF
             }
 
             app.UseRouting();
-            //adcionando sessão
-            app.UseSession();
 
             app.UseCors("CorsPolicy");
 
