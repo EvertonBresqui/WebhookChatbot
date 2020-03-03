@@ -94,17 +94,18 @@ namespace WebhookDF.Controllers
                             cpf = cpf.Replace(".", "");
                             cpf = cpf.Replace("-", "");
                             candidato = candidato.ObterCandidato(cpf);
+                            HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
 
                             if (candidato != null)
                             {
                                 //Salvando em sessão o cpf
                                 HttpContext.Session.SetInt32("logado", 1);
+                                HttpContext.Session.SetInt32("cpfExists", 1);
                                 response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, " + this.Menu();
                             }
                             else
                             {
                                 HttpContext.Session.SetInt32("cpfExists", 0);
-                                HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
                             }
 
