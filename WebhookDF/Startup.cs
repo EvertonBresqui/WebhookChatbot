@@ -29,21 +29,12 @@ namespace WebhookDF
         {
             services.AddDistributedMemoryCache();
             
-            services.AddSession(options =>
-            {
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromDays(1);
-                options.Cookie.Name = "chatbotunoeste.Session";
-                // Make the session cookie essential
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(1);//You can set Time  
+                options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
 
             // Add service and create Policy with options
             services.AddCors(options =>
