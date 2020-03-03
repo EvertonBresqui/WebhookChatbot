@@ -94,6 +94,7 @@ namespace WebhookDF.Controllers
                             cpf = cpf.Replace(".", "");
                             cpf = cpf.Replace("-", "");
                             candidato = candidato.ObterCandidato(cpf);
+                            this.Set("cpf", parameters.Fields["cpf"].StringValue, 1000);
                             HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
 
                             if (candidato != null)
@@ -112,7 +113,8 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaNome")
                     {
-                        response.FulfillmentText = HttpContext.Session.GetString("cpf");
+                        //response.FulfillmentText = HttpContext.Session.GetString("cpf");
+                        response.FulfillmentText = this.Get("cpf");
                         /*
                         HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
                         response.FulfillmentText = "Qual o seu email?";*/
@@ -230,6 +232,30 @@ namespace WebhookDF.Controllers
                             "<li><a href=\"javascript:BOT.Menu(3);\">Número de alunos matriculados para este curso</a></li>" +
                             "<li><a href=\"javascript:BOT.Menu(4);\">Sobre a Unoeste</a></li>" +
                             "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
+        }
+        /// <summary>  
+        /// Get the cookie  
+        /// </summary>  
+        /// <param name="key">Key </param>  
+        /// <returns>string value</returns>  
+        public string Get(string key)
+        {
+            return Request.Cookies[key];
+        }
+        /// <summary>  
+        /// set the cookie  
+        /// </summary>  
+        /// <param name="key">key (unique indentifier)</param>  
+        /// <param name="value">value to store in cookie object</param>  
+        /// <param name="expireTime">expiration time</param>  
+        public void Set(string key, string value, int? expireTime)
+        {
+            CookieOptions option = new CookieOptions();
+            if (expireTime.HasValue)
+                option.Expires = DateTime.Now.AddMinutes(expireTime.Value);
+            else
+                option.Expires = DateTime.Now.AddMilliseconds(10);
+            Response.Cookies.Append(key, value, option);
         }
     }
 }
