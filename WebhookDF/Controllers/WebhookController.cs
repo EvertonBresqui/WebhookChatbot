@@ -98,7 +98,6 @@ namespace WebhookDF.Controllers
 
                             if (candidato != null)
                             {
-                                //Salvando em sessão o cpf
                                 HttpContext.Session.SetInt32("logado", 1);
                                 HttpContext.Session.SetInt32("cpfExists", 1);
                                 response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, " + this.Menu();
