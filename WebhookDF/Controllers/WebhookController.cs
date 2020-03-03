@@ -94,8 +94,8 @@ namespace WebhookDF.Controllers
                             cpf = cpf.Replace(".", "");
                             cpf = cpf.Replace("-", "");
                             candidato = candidato.ObterCandidato(cpf);
-                            this.Set("cpf", parameters.Fields["cpf"].StringValue, 1000);
-                            //HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
+                           // this.Set("cpf", parameters.Fields["cpf"].StringValue, 1000);
+                            HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
 
                             if (candidato != null)
                             {
@@ -113,8 +113,8 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaNome")
                     {
-                        //response.FulfillmentText = HttpContext.Session.GetString("cpf");
-                        response.FulfillmentText = this.Get("cpf");
+                        response.FulfillmentText = HttpContext.Session.GetString("cpf");
+                        //response.FulfillmentText = this.Get("cpf");
                         /*
                         HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
                         response.FulfillmentText = "Qual o seu email?";*/
