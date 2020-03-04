@@ -34,7 +34,7 @@ namespace WebhookDF
                 options.Cookie.Name = ".AdventureWorks.Session";
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromDays(1);
-                options.Cookie.HttpOnly = true;
+                options.Cookie.HttpOnly = false;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = false;
             });
