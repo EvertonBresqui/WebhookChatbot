@@ -29,10 +29,16 @@ namespace WebhookDF
         {
             services.AddDistributedMemoryCache();
             
+            
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromDays(1);//You can set Time  
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 
