@@ -27,19 +27,6 @@ namespace WebhookDF
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
-
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".AdventureWorks.Session";
-                // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromDays(1);
-                options.Cookie.HttpOnly = false;
-                // Make the session cookie essential
-                options.Cookie.IsEssential = false;
-            });
-
-
             // Add service and create Policy with options
             services.AddCors(options =>
             {
@@ -62,8 +49,6 @@ namespace WebhookDF
             }
 
             app.UseRouting();
-            //adcionando sessão
-            app.UseSession();
 
             app.UseCors("CorsPolicy");
 
