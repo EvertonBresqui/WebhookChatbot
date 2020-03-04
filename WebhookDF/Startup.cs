@@ -28,17 +28,15 @@ namespace WebhookDF
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
-            
-            
-            services.AddSession(options => {
-                options.IdleTimeout = TimeSpan.FromDays(1);//You can set Time  
-            });
 
-            services.Configure<CookiePolicyOptions>(options =>
+            services.AddSession(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.Cookie.Name = ".AdventureWorks.Session";
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = false;
             });
 
 
