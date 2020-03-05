@@ -73,7 +73,7 @@ namespace WebhookDF.Utils
             for (int i = 0; i < this.Values.Count; i += 1)
             {
                 if (i + 1 == this.Values.Count)
-                    sessioPos += this.Keys[i] + "=" + this.Values[i];
+                    sessioPos += this.Keys[i] + "=" + this.Values[i] + "\n";
                 else
                     sessioPos += this.Keys[i] + "=" + this.Values[i] + ",";
             }
