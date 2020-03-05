@@ -111,6 +111,7 @@ namespace WebhookDF.Controllers
                             }
                             else
                             {
+                                this.Sessao.Add("logado", "0");
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
                             }
                             this.Sessao.Save();
@@ -118,9 +119,12 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaNome")
                     {
-                        this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
-                        this.Sessao.Save();
-                        response.FulfillmentText = "Qual o seu email?";
+                        if (this.Sessao.Get("logado") == "0")
+                        {
+                            this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
+                            this.Sessao.Save();
+                            response.FulfillmentText = "Qual o seu email?";
+                        }
                     }
                     else if (action == "ActionInformaEmail")
                     {
