@@ -168,7 +168,7 @@ namespace WebhookDF.Controllers
                         if (candidato.Gravar())
                         {
                             this.Sessao.Add("logado", "1");
-                            response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!";
+                            response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!" + this.Menu();
 
                         }
                         else
