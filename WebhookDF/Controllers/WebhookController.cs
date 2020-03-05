@@ -26,9 +26,11 @@ namespace WebhookDF.Controllers
 
         string _agentName = "botunoeste-tojago";
         string _diretorio = "";
+        public Utils.Sessao Sessao { get; set; }
 
         public WebhookController()
         {
+            this.Sessao = new Utils.Sessao();
         }
 
 
@@ -72,8 +74,13 @@ namespace WebhookDF.Controllers
 
             if (request != null)
             {
+                //Obtem o id da sesão do dialogflow
+                this.Sessao.Id = this.getIdSession(request.QueryResult.OutputContexts[0].Name);
+                this.Sessao.Recover();
+
                 string action = request.QueryResult.Action;
                 var parameters = request.QueryResult.Parameters;
+
                 try
                 {
                     Models.Candidato candidato = new Models.Candidato();
@@ -94,39 +101,36 @@ namespace WebhookDF.Controllers
                             cpf = cpf.Replace(".", "");
                             cpf = cpf.Replace("-", "");
                             candidato = candidato.ObterCandidato(cpf);
-                           // this.Set("cpf", parameters.Fields["cpf"].StringValue, 1000);
-                            HttpContext.Session.SetString("cpf", parameters.Fields["cpf"].StringValue);
+                            //gravao cpf na sessao
+                            this.Sessao.Add("cpf", cpf);
 
                             if (candidato != null)
                             {
-                                //HttpContext.Session.SetInt32("logado", 1);
-                                //HttpContext.Session.SetInt32("cpfExists", 1);
+                                this.Sessao.Add("logado", "1");
                                 response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, " + this.Menu();
                             }
                             else
                             {
-                                //HttpContext.Session.SetInt32("cpfExists", 0);
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
                             }
-
+                            this.Sessao.Save();
                         }
                     }
                     else if (action == "ActionInformaNome")
                     {
-                        response.FulfillmentText = HttpContext.Session.GetString("cpf");
-                        //response.FulfillmentText = this.Get("cpf");
-                        /*
-                        HttpContext.Session.SetString("nome", parameters.Fields["nome"].StringValue);
-                        response.FulfillmentText = "Qual o seu email?";*/
+                        this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
+                        this.Sessao.Save();
+                        response.FulfillmentText = "Qual o seu email?";
                     }
                     else if (action == "ActionInformaEmail")
                     {
                         //Recuperando da sessão o cpf se o candidato esta cadastrado
                         string email = parameters.Fields["email"].StringValue;
 
-                        if (Convert.ToInt32(HttpContext.Session.GetInt32("cpfExists")) == 0 && candidato.EmailIsvalid(email))
+                        if (candidato.EmailIsvalid(email))
                         {
-                            HttpContext.Session.SetString("email", email);
+                            this.Sessao.Add("email", email);
+                            this.Sessao.Save();
                             var rcursos = curso.ObterTodos();
                             var mensagem = "Qual Curso Deseja ? <br/><ul>";
 
@@ -144,12 +148,11 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaCurso")
                     {
-                        string cursoo = parameters.Fields["curso"].StringValue;
-
-                        curso = curso.Obter(cursoo);
+                        curso = curso.Obter(parameters.Fields["curso"].StringValue);
                         if (curso != null)
                         {
-                            HttpContext.Session.SetString("curso", curso.Nome);
+                            this.Sessao.Add("curso", curso.Nome);
+                            this.Sessao.Save();
                             response.FulfillmentText = "Vi que você não é um candidato. <a href=\"javascript: BOT.Gravar();\">Clique aqui para se inscrever</a> ou me pergunte alguma coisa.";
                         }
                         else
@@ -159,12 +162,12 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionCadastrar")
                     {
-                        curso = curso.Obter(HttpContext.Session.GetString("curso"));
-                        candidato.Setar(HttpContext.Session.GetString("nome"), HttpContext.Session.GetString("cpf"), HttpContext.Session.GetString("email"), curso);
+                        curso = curso.Obter(this.Sessao.Get("curso"));
+                        candidato.Setar(this.Sessao.Get("nome"), this.Sessao.Get("cpf"), this.Sessao.Get("email"), curso);
 
                         if (candidato.Gravar())
                         {
-                            HttpContext.Session.SetInt32("logado", 1);
+                            this.Sessao.Add("logado", "1");
                             response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!";
 
                         }
@@ -173,16 +176,16 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionMenu")
                     {
-                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        if (this.Sessao.Get("logado") == "1")
                         {
                             response.FulfillmentText = this.Menu();
                         }
                     }
                     else if (action == "ActionObterDadosCadastrais")
                     {
-                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        if (this.Sessao.Get("logado") == "1")
                         {
-                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
                             response.FulfillmentText = "Informações cadastrais: <br/>" +
                                 "Nome: " + candidato.Nome + "<br/>" +
                                 "CPF: " + candidato.CPF + "<br/>" +
@@ -192,9 +195,9 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionObterResultadoVestibular")
                     {
-                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        if (this.Sessao.Get("logado") == "1")
                         {
-                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
                             if (candidato.ResVestibular == 1)
                                 response.FulfillmentText = "Foi aprovado no vestibular :)";
                             else if (candidato.ResVestibular == 0)
@@ -205,9 +208,9 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionObterNumeroAlunosMatriculados")
                     {
-                        if (HttpContext.Session.GetInt32("logado") == 1)
+                        if (this.Sessao.Get("logado") == "1")
                         {
-                            candidato = candidato.ObterCandidato(HttpContext.Session.GetString("cpf"));
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
                             response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições.";
                         }
                     }
@@ -224,6 +227,13 @@ namespace WebhookDF.Controllers
 
         }
 
+
+        public string getIdSession(string name)
+        {
+            if (name != "" && name.Contains("/"))
+                return name.Split('/')[4];
+            return "";
+        }
         private string Menu()
         {
             return "Quais informações deseja obter? <br/><ul>" +

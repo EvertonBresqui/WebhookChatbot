@@ -166,3 +166,4 @@ C:\Users\Pichau\Desktop\trab\chatbotapiunoeste\WebhookDF\obj\Debug\netcoreapp3.1
 C:\Users\Pichau\Desktop\trab\chatbotapiunoeste\WebhookDF\obj\Debug\netcoreapp3.1\WebhookDF.csproj.CopyComplete
 C:\Users\Pichau\Desktop\trab\chatbotapiunoeste\WebhookDF\obj\Debug\netcoreapp3.1\WebhookDF.dll
 C:\Users\Pichau\Desktop\trab\chatbotapiunoeste\WebhookDF\obj\Debug\netcoreapp3.1\WebhookDF.pdb
+C:\Users\Pichau\Desktop\trab\chatbotapiunoeste\WebhookDF\bin\Debug\netcoreapp3.1\candidatos.json
