@@ -119,6 +119,7 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaNome")
                     {
+                        response.FulfillmentText = this.Sessao.Get("logado");
                         if (this.Sessao.Get("logado") == "0")
                         {
                             this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
@@ -128,7 +129,7 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaEmail")
                     {
-                        //Recuperando da sessão o cpf se o candidato esta cadastrado
+                        
                         string email = parameters.Fields["email"].StringValue;
 
                         if (candidato.EmailIsvalid(email))
