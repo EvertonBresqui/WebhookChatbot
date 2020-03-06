@@ -105,22 +105,30 @@ namespace WebhookDF.Controllers
                             this.Sessao.Add("cpf", cpf);
 
                             if (candidato != null)
+                            {
+                                this.Sessao.Add("logado", "1");
                                 response.FulfillmentText = "Olá " + candidato.Nome + ". Encontrei sua inscrição, " + this.Menu();
+                            }
                             else
+                            {
+                                this.Sessao.Add("logado", "0");
                                 response.FulfillmentText = "Não foi possível encontrar seus dados, qual o seu nome?";
+                            }
                             this.Sessao.Save();
                         }
                     }
                     else if (action == "ActionInformaNome")
                     {
-                        response.FulfillmentText = this.Sessao.Get("logado");
-                        this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
-                        this.Sessao.Save();
-                        response.FulfillmentText = "Qual o seu email?";
+                        if (this.Sessao.Get("logado") == "0")
+                        {
+                            this.Sessao.Add("nome", parameters.Fields["nome"].StringValue);
+                            this.Sessao.Save();
+                            response.FulfillmentText = "Qual o seu email?";
+                        }
                     }
                     else if (action == "ActionInformaEmail")
                     {
-
+                        
                         string email = parameters.Fields["email"].StringValue;
 
                         if (candidato.EmailIsvalid(email))
@@ -162,39 +170,53 @@ namespace WebhookDF.Controllers
                         candidato.Setar(this.Sessao.Get("nome"), this.Sessao.Get("cpf"), this.Sessao.Get("email"), curso);
 
                         if (candidato.Gravar())
+                        {
+                            this.Sessao.Add("logado", "1");
                             response.FulfillmentText = "Olá " + candidato.Nome + " sua inscrição foi realizada com sucesso!" + this.Menu();
 
+                        }
                         else
                             response.FulfillmentText = "Desculpe não foi possível realizar cadastro :(, por favor tente novamente mais tarde.";
                     }
                     else if (action == "ActionMenu")
                     {
-                        response.FulfillmentText = this.Menu();
+                        if (this.Sessao.Get("logado") == "1")
+                        {
+                            response.FulfillmentText = this.Menu();
+                        }
                     }
                     else if (action == "ActionObterDadosCadastrais")
                     {
-                        candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
-                        response.FulfillmentText = "Informações cadastrais: <br/>" +
-                            "Nome: " + candidato.Nome + "<br/>" +
-                            "CPF: " + candidato.CPF + "<br/>" +
-                            "Email:" + candidato.Email + " <br/>" +
-                            "Vestibulando curso: " + candidato.Curso.Nome + " <br/>";
-
+                        if (this.Sessao.Get("logado") == "1")
+                        {
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
+                            response.FulfillmentText = "Informações cadastrais: <br/>" +
+                                "Nome: " + candidato.Nome + "<br/>" +
+                                "CPF: " + candidato.CPF + "<br/>" +
+                                "Email:" + candidato.Email + " <br/>" +
+                                "Vestibulando curso: " + candidato.Curso.Nome + " <br/>";
+                        }
                     }
                     else if (action == "ActionObterResultadoVestibular")
                     {
-                        candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
-                        if (candidato.ResVestibular == 1)
-                            response.FulfillmentText = "Foi aprovado no vestibular :)";
-                        else if (candidato.ResVestibular == 0)
-                            response.FulfillmentText = "O resultado ainda não saiu :(";
-                        else if (candidato.ResVestibular == -1)
-                            response.FulfillmentText = "Infelizmente você foi reprovado na primeira chamada :(";
+                        if (this.Sessao.Get("logado") == "1")
+                        {
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
+                            if (candidato.ResVestibular == 1)
+                                response.FulfillmentText = "Foi aprovado no vestibular :)";
+                            else if (candidato.ResVestibular == 0)
+                                response.FulfillmentText = "O resultado ainda não saiu :(";
+                            else if (candidato.ResVestibular == -1)
+                                response.FulfillmentText = "Infelizmente você foi reprovado na primeira chamada :(";
+                        }
                     }
                     else if (action == "ActionObterNumeroAlunosMatriculados")
                     {
-                        candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
-                        response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições.";
+                        if (this.Sessao.Get("logado") == "1")
+                        {
+                            candidato = candidato.ObterCandidato(this.Sessao.Get("cpf"));
+                            response.FulfillmentText = "O número de inscritos para o curso de " + candidato.Curso.Nome + " foi de " + candidato.Curso.NumeroInscritos + " incrições.";
+                        }
                     }
                 }
                 catch (Exception ex)
