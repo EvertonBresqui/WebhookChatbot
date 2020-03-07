@@ -243,9 +243,9 @@ namespace WebhookDF.Controllers
         private string Menu()
         {
             return "Quais informações deseja obter? <br/><ul>" +
-                            "<li><a href=\"javascript:BOT.Menu(3);\">Ir para área do candidato.</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(4);\">Sobre a Unoeste</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
+                            "<li><a href=\"javascript:BOT.Menu(1);\">Ir para área do candidato.</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(2);\">Sobre a Unoeste</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(3);\">Quais cursos a Unoeste tem?</a></li></ul>";
         }
         /// <summary>  
         /// Get the cookie  
