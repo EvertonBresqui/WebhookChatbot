@@ -128,26 +128,28 @@ namespace WebhookDF.Controllers
                     }
                     else if (action == "ActionInformaEmail")
                     {
-                        
-                        string email = parameters.Fields["email"].StringValue;
-
-                        if (candidato.EmailIsvalid(email))
+                        if (this.Sessao.Get("logado") == "0")
                         {
-                            this.Sessao.Add("email", email);
-                            this.Sessao.Save();
-                            var rcursos = curso.ObterTodos();
-                            var mensagem = "Qual Curso Deseja ? <br/><ul>";
+                            string email = parameters.Fields["email"].StringValue;
 
-                            foreach (var item in rcursos)
+                            if (candidato.EmailIsvalid(email))
                             {
-                                mensagem += "<li><a href=\"javascript:BOT.InfCurso('" + item.Nome + "', '" + item.Url + "');\">" + item.Nome + "</a></li>";
+                                this.Sessao.Add("email", email);
+                                this.Sessao.Save();
+                                var rcursos = curso.ObterTodos();
+                                var mensagem = "Qual Curso Deseja ? <br/><ul>";
+
+                                foreach (var item in rcursos)
+                                {
+                                    mensagem += "<li><a href=\"javascript:BOT.InfCurso('" + item.Nome + "', '" + item.Url + "');\">" + item.Nome + "</a></li>";
+                                }
+                                mensagem += "</ul>";
+                                response.FulfillmentText = mensagem;
                             }
-                            mensagem += "</ul>";
-                            response.FulfillmentText = mensagem;
-                        }
-                        else
-                        {
-                            response.FulfillmentText = "Informe um email válido!";
+                            else
+                            {
+                                response.FulfillmentText = "Informe um email válido!";
+                            }
                         }
                     }
                     else if (action == "ActionInformaCurso")
@@ -241,9 +243,7 @@ namespace WebhookDF.Controllers
         private string Menu()
         {
             return "Quais informações deseja obter? <br/><ul>" +
-                            "<li><a href=\"javascript:BOT.Menu(1);\">Obter dados cadastrais</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(2);\">Obter resultado vestibular</a></li>" +
-                            "<li><a href=\"javascript:BOT.Menu(3);\">Número de alunos matriculados para este curso</a></li>" +
+                            "<li><a href=\"javascript:BOT.Menu(3);\">Ir para área do candidato.</a></li>" +
                             "<li><a href=\"javascript:BOT.Menu(4);\">Sobre a Unoeste</a></li>" +
                             "<li><a href=\"javascript:BOT.Menu(5);\">Quais cursos a Unoeste tem?</a></li></ul>";
         }
